@@ -1,0 +1,53 @@
+<div><H3>Coverage test</H3>
+    <div class="form-group">
+        <div class="row">
+            <!-- <label class="col-sm-3 control-label">Address</label> -->
+            <div class="col-sm-8">
+                <textarea class="form-control" rows="8" placeholder="Address, for ex : 3 rue de Londres 75009 Paris" ng-model='singleAddr'></textarea>
+            </div>
+            <a class="col-sm-2 btn btn-lg btn-success" ng-href="#/" ng-click="launchTest(singleAddr)">Test <span class="glyphicon glyphicon-ok"></span></a>
+        </div>
+        <div class="row">
+        <I>OR</I>
+        </div>
+        <div class="row">
+            <div class="col-sm-10">
+                <button drop-target type="button" class="btn btn-default btn-lg btn-group-justified btn-info disabled" id="drop_zone">Drop addresses file(s) HERE</button>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger" role="alert" ng-show="addressTextEmpty">Address text is empty</div>
+<div class="alert alert-danger" role="alert" ng-show="geocodeError">Address geocode returns : {{geocodeErrorCode}}</div>
+
+<div class="row marketing">
+    <div> 
+        <div map-lazy-load={{googleMapsUrl}} map-lazy-load-params="">
+            <ng-map center="48.8765789,2.328429" zoom="14">
+            </ng-map>
+        </div>
+    </div>
+    
+    <div ng-show="showResults">
+        <h3>Results <span class="glyphicon glyphicon-trash" ng-click="results=[]; showResults=false"></span></h3>
+        <TABLE class="table table-bordered">
+            <TR>
+                <TH>ID</TH>
+                </TH><TH ng-repeat="(key, value) in results[0]">{{key}}</TH>
+            </TR>
+            <TR ng-repeat="(key, res) in results">
+                <TD><A ng-click="map.setCenter({lat : res.lat,lng : res.lng});">{{key}}</A></TD>
+                <TD ng-repeat="val in res">{{val}}</TD>
+            </TR>
+        </TABLE>
+        <h4>Download results</h4>
+        <div class="btn-group" role="group">
+            <button type="button" class="btn btn-primary" ng-click="download(results)">json</button>
+            <button type="button" class="btn btn-success disabled" ng-click="download('xls');">xls</button>
+            <button type="button" class="btn btn-info disabled" ng-click="download('csv');">csv</button>
+        </div>
+    </div>
+
+    
+</div>

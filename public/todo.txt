@@ -1,0 +1,2 @@
+telechargement de la carte google
+Cache local des tests (geoloc et/ou sigfox)

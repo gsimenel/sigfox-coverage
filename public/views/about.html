@@ -1,0 +1,26 @@
+
+<div><H3>Credentials</H3>
+    <B>Mandatory</B>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Sigfox API Username</span>
+    <input type="text" class="form-control" placeholder="ex : username" ng-model="sigfoxUsername">
+</div>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Sigfox API password</span>
+    <input type="text" class="form-control" placeholder="ex : password" ng-model="sigfoxPassword">
+</div>
+<BR><B>Optional (but recommended) </B>
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Google Maps key</span>
+    <input type="text" class="form-control" placeholder="ex : key" aria-describedby="basic-addon1" ng-model="googleMapKey">
+</div><SMALL>There might be some restrictions for not providing Google maps key. A free key can be created <a href="https://www.google.com">here</a>.</SMALL> 
+<BR><BR>
+<CENTER>
+    <button class="btn btn-default" type="button" ng-click="testCredentials()">Save credentials</button>
+</CENTER>
+<BR><BR>
+
+<div class="alert alert-success" ng-show="alertCredentialOK" role="alert">Sigfox credentials successfully tested</div>
+<div class="alert alert-warning" role="alert" ng-show="alertNoGoogleMaps">No Google Maps key provided</div>
+<div class="alert alert-danger" role="alert" ng-show="alertSigfoxError">Sigfox credentials return error</div>
+<div class="alert alert-danger" role="alert" ng-show="alertGoogleMapsError">Google Maps credentials return error</div>
