@@ -50,9 +50,10 @@ angular.module('sigfoxCoverageApp')
     }
 })
     
-.controller('MainCtrl', [ '$scope', 'NgMap', 'GeoCoder', '$cookies', 'sigfox', 'FileSaver', 'Blob', 
+.controller('MainCtrl', [ '$scope', 'NgMap', 'GeoCoder', '$cookies', 'sigfox', 'FileSaver', 'Blob',
         function ($scope, NgMap, GeoCoder, $cookies, sigfox, FileSaver, Blob) {
     
+
     // Main variable 
     if (typeof $scope.results == 'undefined') {
         $scope.results = [];    
@@ -87,6 +88,21 @@ angular.module('sigfoxCoverageApp')
         $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=" + $scope.googleMapKey;
     }
     
+    // Function to remove and clean the results shown 
+    $scope.cleanResults = function() {
+        $scope.results=[]; 
+        $scope.showResults=false; 
+        // delete all markers 
+        NgMap.getMap().then(function(map){
+            for (var key in $scope.markers) {
+                $scope.markers[key].setMap(null);
+            }; 
+            $scope.markers= [];
+        }, function(error) {
+            console.log("NgMap error", error);    
+        });
+    };
+            
     // Functions launched from the UI 
     $scope.launchTest = function(addr) {
         $scope.addressTextEmpty = false;
@@ -145,19 +161,20 @@ angular.module('sigfoxCoverageApp')
                                 new google.maps.Point(0, 34));
                                 
                             // Create a new marker
-                            var marker = new google.maps.Marker({
+                            $scope.markers.push(new google.maps.Marker({
                                 position: {
                                     lat: result[0].geometry.location.lat(), 
                                     lng: result[0].geometry.location.lng()
                                 },
                                 map: map,
                                 icon : pinImage
-                            }); 
-                            marker.setMap(map);
+                            })); 
+                            
+                            $scope.markers[$scope.markers.length - 1 ].setMap(map);
 
                             // Get the current Bounds of the map and extend it to fit the new marker
                             var bounds = map.getBounds();
-                            bounds.extend(marker.position);
+                            bounds.extend($scope.markers[$scope.markers.length - 1].position);
                             map.fitBounds(bounds);
 
 
@@ -186,10 +203,10 @@ angular.module('sigfoxCoverageApp')
     
     $scope.download = function(dataJson) {
         console.log("launch download");
-        /* var data = new Blob([ JSON.stringify(dataJson) ], { type: 'text/plain;charset=utf-8' });
+        var data = new Blob([ JSON.stringify(dataJson) ], { type: 'text/plain;charset=utf-8' });
         FileSaver.saveAs(data, Date.now() + '_results.json');
         
-        */
+        
     };
     
   }]);

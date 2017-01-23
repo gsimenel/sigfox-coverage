@@ -11,7 +11,7 @@
     "angular-sanitize": "^1.4.0",
     "angular-touch": "^1.4.0",
     "angular-file-saver": "^1.1.2",
-    "ng-maps": "*",
+    "ngmap": "*",
     "angular-base64": "^2.0.5",
     "lodash": "^4.17.3",
     "restangular": "^1.6.0"
@@ -19,7 +19,7 @@
   "devDependencies": {
     "angular-mocks": "^1.4.0"
   },
-  "appPath": "app",
+  "appPath": "public",
   "moduleName": "sigfoxCoverageApp",
   "overrides": {
     "bootstrap": {

@@ -20,7 +20,6 @@
     "commit": "413d8dacc39c1ec3248f8de0b499eef2311d8f51"
   },
   "_source": "https://github.com/allenhwkim/angularjs-google-maps.git",
-  "_target": "^1.17.8",
-  "_originalSource": "ngmap",
-  "_direct": true
+  "_target": "*",
+  "_originalSource": "ngmap"
 }
